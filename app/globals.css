@@ -72,3 +72,128 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes shimmer {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cta-button:hover::before {
+  opacity: 1;
+}
+
+/* Sales Process Animation Styles */
+.sales-process-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.process-line {
+  position: absolute;
+  left: 48px;
+  top: 0;
+  height: 80%;
+  width: 2px;
+  background: #EAECF0;
+}
+
+.process-step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  left: 24px;
+}
+
+.step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #EAECF0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-badge {
+  background: white;
+  border: 1px solid #EAECF0;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.step-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #EAECF0;
+  transition: background-color 0.3s ease;
+}
+
+.step-badge.active .step-indicator {
+  background: #22C55E;
+}
+
+.step-loader {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #F4A20C;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  display: none;
+}
+
+.step-loader.active {
+  display: block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.process-step:nth-child(2) { top: 0%; }
+.process-step:nth-child(3) { top: 20%; }
+.process-step:nth-child(4) { top: 40%; }
+.process-step:nth-child(5) { top: 60%; }
+.process-step:nth-child(6) { top: 80%; }
+
+.process-step {
+  flex-direction: row;
+}
